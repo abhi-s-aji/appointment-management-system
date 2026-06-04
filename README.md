@@ -119,7 +119,7 @@ Protected views require authentication before access is granted.
 ### 1. Clone the Repository
 
 ```bash
-git clone <https://github.com/abhi-s-aji/appointment-management-system>
+git clone https://github.com/abhi-s-aji/appointment-management-system
 cd appointment-management-system
 ```
 
