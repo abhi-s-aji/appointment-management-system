@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5" style="max-width: 800px;">
+    <div class="mb-4">
+        <h3 class="fw-bold text-dark mb-1" style="letter-spacing: -0.75px;">Application Tracking Dashboard</h3>
+        <p class="text-muted small">Monitor active appointment allocation statuses from your patient history records.</p>
+    </div>
+
+    {% if bookings %}
+        <div class="d-flex flex-column gap-3">
+            {% for booking in bookings %}
+                <div class="card border-0 shadow-sm p-4" style="border-radius: 20px; background: #ffffff;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                        <div>
+                            <h5 class="fw-bold text-dark mb-0">{{ booking.assigned_doctor.doc_name }}</h5>
+                            <span class="text-muted small">{{ booking.assigned_doctor.doc_department.dep_name }}</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <!-- Premium Download Ticket Button -->
+                            {% if booking.status == 'Approved' %}
+                                <a href="{% url 'download_ticket' booking.id %}" target="_blank" 
+                                   class="btn btn-sm text-white fw-bold shadow-sm px-3 py-2" 
+                                   style="background-color: #0891b2; border-radius: 10px; transition: all 0.2s;">
+                                   <i class="bi bi-download me-1"></i> View & Print Ticket
+                                </a>
+                            {% endif %}
+                            
+                            <span class="badge px-3 py-2 fw-semibold" style="border-radius: 12px; 
+                                {% if booking.status == 'Approved' %} background-color: #d1fae5; color: #065f46;
+                                {% elif booking.status == 'Rescheduled' %} background-color: #fef3c7; color: #92400e;
+                                {% elif booking.status == 'Rejected_By_Patient' %} background-color: #fee2e2; color: #991b1b;
+                                {% else %} background-color: #f1f5f9; color: #334155; {% endif %}">
+                                {{ booking.get_status_display }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row g-2 text-secondary small border-top pt-3">
+                        <div class="col-sm-6"><strong>Patient Name:</strong> {{ booking.patient_name }}</div>
+                        <div class="col-sm-6"><strong>Appointment Date:</strong> {{ booking.appointment_date }}</div>
+                        <div class="col-sm-6"><strong>Scheduled Time:</strong> {{ booking.get_appointment_time_display }}</div>
+                        <div class="col-sm-6"><strong>Booked On:</strong> {{ booking.booked_on }}</div>
+                    </div>
+
+                    {% if booking.status == 'Rescheduled' %}
+                        <div class="alert alert-warning border-0 mt-3 p-3 d-flex flex-column gap-2" style="background-color: #fffbeb; border-radius: 12px;">
+                            <span class="fw-medium text-warning-dark" style="color: #92400e;">Proposed Alternative Slot:</span>
+                            <div class="small text-muted">
+                                Date: <strong>{{ booking.proposed_date }}</strong> | Time: <strong>{{ booking.proposed_time }}</strong>
+                            </div>
+                            <div class="d-flex gap-2 mt-1">
+                                <a href="{% url 'accept_reschedule' booking.id %}" class="btn btn-success btn-sm px-3 fw-semibold" style="border-radius: 8px; background-color: #10b981; border: 0;">Accept Slot</a>
+                                <a href="{% url 'reject_reschedule' booking.id %}" class="btn btn-danger btn-sm px-3 fw-semibold" style="border-radius: 8px; background-color: #ef4444; border: 0;">Reject Proposal</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="card text-center p-5 border-0 shadow-sm" style="border-radius: 20px; background: #ffffff;">
+            <p class="text-muted mb-0">No active appointment records attributed to this account workspace profile.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

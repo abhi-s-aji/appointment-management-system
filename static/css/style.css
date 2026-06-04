@@ -1,0 +1,270 @@
+:root {
+    background: #f2f6fd;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: radial-gradient(circle at 10% 20%, rgba(242, 246, 253, 1) 0%, rgba(224, 233, 246, 1) 90.1%) !important;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+:root {
+    --easing-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+a, 
+.btn, 
+.card, 
+.shortcut-card-link, 
+.form-control,
+.metric-card,
+.alternative-date-row {
+    transition: all 0.4s var(--easing-smooth) !important;
+}
+
+@keyframes cardIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes blobFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-15px) scale(1.05); }
+}
+
+@keyframes premiumFadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: premiumFadeInUp 0.6s var(--easing-smooth) both;
+}
+
+.bg-decoration-blob-1 {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.06) 0%, rgba(0, 210, 255, 0.02) 100%);
+    border-radius: 50%;
+    top: -50px;
+    left: -100px;
+    z-index: 1;
+    animation: blobFloat 7s ease-in-out infinite;
+}
+
+.bg-decoration-blob-2 {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(0, 210, 255, 0.05) 0%, rgba(0, 123, 255, 0.01) 100%);
+    border-radius: 50%;
+    bottom: -30px;
+    right: -80px;
+    z-index: 1;
+    animation: blobFloat 6s ease-in-out infinite alternate;
+}
+
+.booking-card {
+    background: #ffffff !important;
+    border-radius: 24px !important;
+    box-shadow: 0 15px 35px rgba(30, 48, 80, 0.08) !important;
+    animation: cardIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+    overflow: hidden;
+}
+
+.card-accent-bar {
+    height: 6px;
+    background: linear-gradient(90deg, #007bff, #00d2ff);
+    width: 100%;
+}
+
+.step-tracker {
+    max-width: 280px;
+    margin: 0 auto;
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.4;
+}
+
+.step-item.active {
+    opacity: 1;
+}
+
+.step-num {
+    width: 28px;
+    height: 28px;
+    background-color: #e2e8f0;
+    color: #4a5568;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.step-item.active .step-num {
+    background-color: #007bff;
+    color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15);
+}
+
+.step-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #4a5568;
+}
+
+.step-line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #e2e8f0;
+    margin-bottom: 16px;
+    max-width: 100px;
+}
+
+.success-icon-wrap {
+    width: 70px;
+    height: 70px;
+    background-color: #e6fcf5;
+    color: #0ca678;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.booking-form p {
+    margin-bottom: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.booking-form label {
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+    color: #4a5568 !important;
+    margin-bottom: 8px !important;
+    text-transform: capitalize !important;
+    text-align: left !important;
+}
+
+.booking-form input, 
+.booking-form select {
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 16px !important;
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    font-size: 0.95rem !important;
+    color: #2d3748 !important;
+    background-color: #f8fafc !important;
+}
+
+.booking-form input:focus, 
+.booking-form select:focus {
+    border-color: #007bff !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.12) !important;
+    outline: none !important;
+}
+
+.btn-booking-submit {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2) !important;
+}
+
+.btn-booking-submit:hover {
+    background: linear-gradient(135deg, #0069d9 0%, #004085 100%) !important;
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.35) !important;
+    transform: translateY(-2px) !important;
+}
+
+.premium-modal-canvas {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+    backdrop-filter: blur(12px);
+    border-top: 6px solid #dc3545 !important;
+}
+
+.modal-alert-icon {
+    font-size: 2.8rem;
+}
+
+.alternative-slots-panel {
+    background-color: #f8fafc;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+}
+
+.alternative-date-row {
+    background: #ffffff !important;
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    width: 100%;
+    text-align: left;
+}
+
+.alternative-date-row:hover {
+    border-color: #007bff !important;
+    background-color: #f0f7ff !important;
+    transform: translateX(6px) scale(1.01);
+}
+
+.shortcut-card-link:hover, 
+.metric-card:hover {
+    transform: translateY(-5px) scale(1.01) !important;
+    box-shadow: 0 20px 30px -10px rgba(37, 99, 235, 0.08) !important;
+}
+
+.form-control:focus {
+    transform: scale(1.005);
+}
+
+.date-label-text {
+    color: #2d3748;
+    font-size: 0.95rem;
+}
+
+.bullet-arrow {
+    color: #007bff;
+    margin-right: 4px;
+    font-size: 0.85rem;
+}
+
+.day-tag-pill {
+    background-color: #e6f0fa !important;
+    color: #0056b3 !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    border-radius: 8px !important;
+}
+
+@media (max-width: 768px) {
+    .form-control, input, textarea, select {
+        font-size: 16px !important;
+    }
+}

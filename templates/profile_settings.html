@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-wrapper" style="max-width: 600px; margin: 40px auto; padding: 32px; background: #ffffff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); border: 1px solid #e2e8f0;">
+    <div style="text-align: center; margin-bottom: 32px;">
+        <div style="width: 80px; height: 80px; background-color: #2563eb; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; margin: 0 auto 16px;">
+            {{ user.username|slice:":1"|upper }}
+        </div>
+        <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin: 0 0 8px;">Account Profile Settings</h2>
+        <p style="font-size: 14px; color: #64748b; margin: 0;">Manage your basic clinical account data attributes</p>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success border-0 p-3 mb-4 text-success" style="border-radius: 10px; font-size: 0.88rem; background-color: #dcfce7; font-weight: 500;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px;">System Username</label>
+            <input type="text" value="{{ user.username }}" readonly 
+                   style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; background-color: #f1f5f9; color: #64748b; cursor: not-allowed; outline: none;">
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px;">Email Address</label>
+            <input type="email" value="{{ user.email }}" readonly 
+                   style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; background-color: #f1f5f9; color: #64748b; cursor: not-allowed; outline: none;">
+        </div>
+
+        <div style="margin-bottom: 32px;">
+            <label for="first_name" style="display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px;">Full Name</label>
+            <input type="text" id="first_name" name="first_name" value="{{ full_name }}" placeholder="Provide your full clinical name" 
+                   style="width: 100%; padding: 14px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; background-color: #f8fafc; color: #1e293b; outline: none; transition: border-color 0.2s;"
+                   onfocus="this.style.borderColor='#2563eb'" onblur="this.style.borderColor='#cbd5e1'">
+        </div>
+
+        <div style="display: flex; gap: 16px; justify-content: flex-end;">
+            <a href="{% url 'track_progress' %}" style="padding: 14px 24px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; font-weight: 600; color: #475569; text-decoration: none; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#f8fafc'" onmouseout="this.style.backgroundColor='transparent'">
+                Cancel
+            </a>
+            <button type="submit" style="padding: 14px 28px; background-color: #2563eb; color: #ffffff; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background-color 0.2s;"
+                    onmouseover="this.style.backgroundColor='#1d4ed8'" onmouseout="this.style.backgroundColor='#2563eb'">
+                Save Changes
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

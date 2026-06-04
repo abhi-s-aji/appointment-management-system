@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="mb-5 text-center">
+        <span class="text-muted text-uppercase tracking-wider font-monospace fw-bold" style="font-size: 0.75rem; letter-spacing: 1px;">Medical Consultants</span>
+        <h2 class="fw-bold text-dark mt-1">Our Medical Specialists</h2>
+    </div>
+    
+    <div class="row g-4">
+        {% for doc in doctors_list %}
+        <div class="col-sm-6 col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-4" style="border-radius: 16px; background: #ffffff;">
+                <div class="card-body p-0 d-flex flex-column h-100">
+                    <span class="badge bg-primary-subtle text-primary mb-3 align-self-start text-uppercase font-monospace" style="font-size: 0.7rem; letter-spacing: 0.5px; padding: 6px 12px; border-radius: 20px;">
+                        {{ doc.doc_department.dep_name }}
+                    </span>
+                    
+                    <h5 class="fw-bold text-dark mb-3">{{ doc.doc_name }}</h5>
+                    
+                    <div class="text-secondary small mb-3 border-top border-bottom py-3">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span>✉️</span>
+                            <span class="text-truncate">{{ doc.doc_email }}</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 mb-0">
+                            <span>📞</span>
+                            <span>{{ doc.doc_phone }}</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-muted small mb-0 flex-grow-1" style="line-height: 1.5;">
+                        {{ doc.doc_bio }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-112 text-center py-5">
+            <p class="text-muted mb-0">No doctors found in the database.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container my-5 pb-4">
+    <div class="card position-relative overflow-hidden border-0 p-5 rounded-4 shadow-lg text-center" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+        <div class="position-absolute rounded-circle" style="width: 200px; height: 200px; background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%); top: -50px; right: -50px;"></div>
+        <div class="position-absolute rounded-circle" style="width: 200px; height: 200px; background: radial-gradient(circle, rgba(56,189,248,0.1) 0%, transparent 70%); bottom: -50px; left: -50px;"></div>
+        <div class="position-relative z-index-1 py-3">
+            <span class="text-uppercase tracking-wider font-monospace fw-bold text-primary mb-2 d-block" style="font-size: 0.75rem; letter-spacing: 1.5px;">Direct Access Portal</span>
+            <h3 class="fw-bold text-white mb-2" style="letter-spacing: -0.5px;">Need Immediate Clinical Assistance?</h3>
+            <p class="text-slate mb-4 mx-auto" style="max-width: 550px; font-size: 0.95rem; color: #94a3b8; line-height: 1.6;">
+                Avoid the long waiting lines and busy phone numbers. Request your appointment online in just a few clicks, and we will take care of the rest.
+            </p>
+            <a href="{% url 'booking' %}" class="btn btn-primary fw-semibold px-4 py-3 shadow-sm border-0 text-white" style="border-radius: 10px; background-color: #2563eb; font-size: 0.95rem;">
+                Secure Appointment Slot
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

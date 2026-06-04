@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}City Hospital{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7fa; letter-spacing: -0.15px; }
+        .navbar-custom { background-color: #0a192f !important; padding: 14px 0; position: relative; z-index: 9999 !important; }
+        .navbar-custom .navbar-brand { color: #fff !important; font-weight: 700; font-size: 1.25rem; text-decoration: none; }
+        .navbar-custom .navbar-brand span { color: #00d6ff !important; }
+        .navbar-custom .nav-link { color: rgba(255, 255, 255, 0.8) !important; font-weight: 500; font-size: 0.92rem; padding: 8px 16px !important; }
+        .navbar-custom .nav-link:hover, .navbar-custom .nav-link.active { color: #00d6ff !important; }
+        .navbar-toggler { border: none !important; }
+        .navbar-toggler-icon { filter: invert(1); }
+        .profile-avatar-btn { width: 38px; height: 38px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff !important; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; cursor: pointer; }
+        .custom-dropdown-menu { border-radius: 14px !important; border: 1px solid #e2e8f0 !important; box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12) !important; padding: 8px !important; min-width: 260px !important; background: #ffffff !important; z-index: 10000 !important; }
+        .custom-dropdown-item { display: block; width: 100%; padding: 10px 14px; color: #334155 !important; font-size: 0.88rem; font-weight: 500; border-radius: 8px; text-decoration: none; text-align: left; background: transparent; border: 0; transition: all 0.2s ease; }
+        .custom-dropdown-item:hover { background: #f1f5f9 !important; color: #2563eb !important; }
+        .main-wrapper { min-height: calc(100vh - 140px); display: flex; flex-direction: column; justify-content: center; }
+        footer { background-color: #0a192f; color: #64748b; font-size: 0.82rem; padding: 1.5rem 0; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="/">City<span>Hospital</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/booking/">Booking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/doctors/">Docs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/departments/">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/contact/">Contact Us</a></li>
+                </ul>
+                <div class="d-flex align-items-center ms-auto">
+                    {% if user.is_authenticated %}
+                        <div class="dropdown">
+                            <div class="profile-avatar-btn" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ user.username|slice:":1"|upper }}
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-end custom-dropdown-menu mt-2">
+                                <div class="px-3 py-2 border-bottom mb-1 d-flex align-items-center gap-2" style="padding: 12px !important;">
+                                    <div class="d-flex align-items-center justify-content-center bg-light text-dark fw-bold rounded-circle border" style="width: 36px; height: 36px;">
+                                        {{ user.username|slice:":1"|upper }}
+                                    </div>
+                                    <div class="overflow-hidden" style="line-height: 1.3;">
+                                        <span class="d-block fw-bold text-dark text-truncate">
+                                            {% if user.first_name %}{{ user.first_name }} {{ user.last_name }}{% else %}{{ user.username }}{% endif %}
+                                        </span>
+                                        <small class="text-muted text-truncate d-block">{{ user.email }}</small>
+                                    </div>
+                                </div>
+                                <a class="custom-dropdown-item" href="{% url 'track_progress' %}">Track My Applications</a>
+                                <a class="custom-dropdown-item" href="{% url 'user_profile_settings' %}">Account Settings</a>
+                                <hr class="dropdown-divider my-1 opacity-50">
+                                <form method="POST" action="{% url 'logout' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="custom-dropdown-item text-danger w-100 fw-bold">Sign Out Account</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn text-white px-4 py-2 fw-semibold" style="border-radius: 20px; background-color: #2563eb; font-size: 0.85rem; border:0;">Sign In</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="main-wrapper">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

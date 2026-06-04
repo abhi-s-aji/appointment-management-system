@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    @keyframes pulse {
+        0% { transform: scale(0.95); opacity: 0.5; }
+        50% { transform: scale(1.1); opacity: 1; }
+        100% { transform: scale(0.95); opacity: 0.5; }
+    }
+    .min-vh-75 {
+        min-height: 70vh;
+    }
+    .quick-access-matrix {
+        background-color: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+        padding: 4rem 0;
+    }
+    .shortcut-card-link {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        text-decoration: none;
+        display: block;
+        height: 100%;
+    }
+    .shortcut-card-link:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.04);
+        border-color: #2563eb;
+    }
+</style>
+
+<div class="container my-5" style="overflow-x: hidden;">
+    <div class="row align-items-center min-vh-75 py-4">
+        
+        <div class="col-lg-6 mb-5 mb-lg-0">
+            <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill font-weight-semibold mb-3">
+                Next-Gen Healthcare Management
+            </span>
+            <h1 class="display-4 fw-bold text-dark mb-3 tracking-tight" style="line-height: 1.2;">
+                Your Health, Our <span class="text-primary">Supreme Priority</span>.
+            </h1>
+            <p class="text-muted fs-5 mb-4" style="max-width: 500px; line-height: 1.6;">
+                Experience elite medical care powered by modern data architecture. Seamlessly manage clinical appointments, connect with industry-leading medical doctors, and review treatment diagnostics instantly.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+                <a href="{% url 'booking' %}" class="btn btn-primary btn-lg px-4 py-3 shadow-sm" style="border-radius: 12px; font-weight: 600;">
+                    Book Appointment
+                </a>
+                <a href="{% url 'doctors' %}" class="btn btn-outline-secondary btn-lg px-4 py-3" style="border-radius: 12px; font-weight: 600;">
+                    Meet Our Specialists
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card border-0 p-4 p-sm-5 shadow-lg" style="border-radius: 24px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);">
+                <div class="mb-4">
+                    <h4 class="fw-bold text-dark mb-0">Live Clinic Status</h4>
+                    <span class="text-success small fw-medium d-flex align-items-center gap-1 mt-1">
+                        <span class="d-inline-block rounded-circle bg-success" style="width: 8px; height: 8px; animation: pulse 2s infinite;"></span>
+                        Operational & Accepting Patients
+                    </span>
+                </div>
+
+                <hr class="border-light-subtle my-3">
+
+                <div class="d-flex justify-content-between align-items-center py-2">
+                    <span class="text-secondary fw-medium">Available General Beds:</span>
+                    <span class="fw-bold text-dark fs-5">14 Available</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center py-2">
+                    <span class="text-secondary fw-medium">Active Duty Specialists:</span>
+                    <span class="fw-bold text-dark fs-5">28 On-Call</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center py-2">
+                    <span class="text-secondary fw-medium">Avg. ER Triage Wait Time:</span>
+                    <span class="fw-bold text-primary fs-5">12 Mins</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="quick-access-matrix">
+    <div class="container">
+        <div class="mb-4">
+            <span class="text-muted text-uppercase tracking-wider font-monospace fw-bold" style="font-size: 0.65rem; letter-spacing: 1px;">Institutional Shortcuts</span>
+            <h4 class="fw-bold text-dark mt-1 mb-0">Quick Portal Access</h4>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-sm-6 col-md-3">
+                <a href="{% url 'department' %}" class="shortcut-card-link p-4">
+                    <h6 class="fw-bold text-dark mb-1">Departments</h6>
+                    <p class="text-muted small mb-0">Browse our specialized clinical treatment divisions.</p>
+                </a>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <a href="{% url 'doctors' %}" class="shortcut-card-link p-4">
+                    <h6 class="fw-bold text-dark mb-1">Our Doctors</h6>
+                    <p class="text-muted small mb-0">View certified expert consultants currently on duty.</p>
+                </a>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <a href="{% url 'about' %}" class="shortcut-card-link p-4">
+                    <h6 class="fw-bold text-dark mb-1">Institutional Profile</h6>
+                    <p class="text-muted small mb-0">Learn about our core mission statement and metrics.</p>
+                </a>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <a href="{% url 'contact' %}" class="shortcut-card-link p-4">
+                    <h6 class="fw-bold text-dark mb-1">Support Desk</h6>
+                    <p class="text-muted small mb-0">Submit message files directly to administrative offices.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5 pb-4">
+    <div class="card position-relative overflow-hidden border-0 p-5 rounded-4 shadow-lg text-center" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+        <div class="position-absolute rounded-circle" style="width: 200px; height: 200px; background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%); top: -50px; right: -50px;"></div>
+        <div class="position-absolute rounded-circle" style="width: 200px; height: 200px; background: radial-gradient(circle, rgba(56,189,248,0.1) 0%, transparent 70%); bottom: -50px; left: -50px;"></div>
+        <div class="position-relative z-index-1 py-3">
+            <span class="text-uppercase tracking-wider font-monospace fw-bold text-primary mb-2 d-block" style="font-size: 0.75rem; letter-spacing: 1.5px;">Direct Access Portal</span>
+            <h3 class="fw-bold text-white mb-2" style="letter-spacing: -0.5px;">Need Immediate Clinical Assistance?</h3>
+            <p class="text-slate mb-4 mx-auto" style="max-width: 550px; font-size: 0.95rem; color: #94a3b8; line-height: 1.6;">
+                Avoid the long waiting lines and busy phone numbers. Request your appointment online in just a few clicks, and we will take care of the rest.
+            </p>
+            <a href="{% url 'booking' %}" class="btn btn-primary fw-semibold px-4 py-3 shadow-sm border-0 text-white" style="border-radius: 10px; background-color: #2563eb; font-size: 0.95rem;">
+                Secure Appointment Slot
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-wrapper" style="min-height: 80vh; display: flex; align-items: center; justify-content: center; background-color: #f4f7f6; padding: 40px 20px;">
+    
+    <div class="auth-card" style="width: 100%; max-width: 400px; background: #ffffff; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); border: 1px solid #eef2f5; text-align: center;">
+        
+        <div style="width: 64px; height: 64px; background-color: #dcfce7; color: #15803d; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+        
+        <h2 style="font-size: 24px; font-weight: 700; color: #1e293b; margin-bottom: 12px;">Congratulations!</h2>
+        <p style="font-size: 14px; color: #64748b; margin-bottom: 32px; line-height: 1.5;">
+            Your City Hospital account has been successfully created. You can now access your dashboard using your credentials.
+        </p>
+        
+        <a href="{% url 'login' %}" style="display: block; width: 100%; padding: 14px; background-color: #2563eb; color: #ffffff; border-radius: 10px; font-size: 15px; font-weight: 600; text-decoration: none; transition: background-color 0.2s;"
+           onmouseover="this.style.backgroundColor='#1d4ed8'" onmouseout="this.style.backgroundColor='#2563eb'">
+            Go to Login Page
+        </a>
+        
+    </div>
+</div>
+{% endblock %}

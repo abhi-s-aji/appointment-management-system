@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; display: flex; justify-content: center; padding: 40px; }
+        .ticket-card {
+            background: #fff; width: 450px; padding: 40px; border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;
+        }
+        .header { border-bottom: 2px solid #0a192f; padding-bottom: 20px; margin-bottom: 25px; }
+        .data-row { display: flex; justify-content: space-between; margin-bottom: 12px; }
+        .status-box { 
+            background: #dcfce7; color: #166534; padding: 12px; 
+            border-radius: 10px; text-align: center; font-weight: 700; margin-top: 25px;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; }
+            .ticket-card { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket-card">
+        <div class="header">
+            <h3 style="margin: 0; color: #0a192f;">City Hospital</h3>
+            <small style="color: #64748b;">Official Appointment Ticket</small>
+        </div>
+        <div class="data-row"><span>Patient:</span> <strong>{{ booking.patient_name }}</strong></div>
+        <div class="data-row"><span>Doctor:</span> <strong>{{ booking.assigned_doctor.doc_name }}</strong></div>
+        <div class="data-row"><span>Date:</span> <strong>{{ booking.appointment_date }}</strong></div>
+        <div class="data-row"><span>Time:</span> <strong>{{ booking.appointment_time }}</strong></div>
+        <div class="status-box">Status: {{ booking.status }}</div>
+        
+        <div class="no-print" style="margin-top: 25px; text-align: center;">
+            <button onclick="window.print()" style="padding: 10px 20px; background: #2563eb; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                Download as PDF / Print
+            </button>
+        </div>
+    </div>
+</body>
+</html>

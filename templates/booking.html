@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<style>
+    .booking-card-wrapper {
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.04);
+        border: 1px solid #e2e8f0;
+    }
+    .premium-form-input {
+        border-radius: 12px !important;
+        padding: 12px 16px !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #0f172a !important;
+        font-size: 0.95rem !important;
+        transition: all 0.2s ease;
+    }
+    .premium-form-input:focus {
+        border-color: #2563eb !important;
+        box-shadow: 0 0 0 4px rgba(37,99,235,0.1) !important;
+        background-color: #ffffff !important;
+    }
+    .step-badge-node {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+    
+    /*  Interactive design layout styling rules for Step 2 link */
+    .step-link-node {
+        text-decoration: none !important;
+        cursor: pointer;
+    }
+    .step-link-node:hover .step-badge-node {
+        border-color: #2563eb !important;
+        color: #2563eb !important;
+        background-color: rgba(37, 99, 235, 0.05) !important;
+        transform: translateY(-1px);
+    }
+    .step-link-node:hover small {
+        color: #2563eb !important;
+    }
+
+    /*  PREMIUM PROCESSING LINE ANIMATION (CALMED SPEED) */
+    .animated-process-line {
+        height: 3px !important;
+        background: #e2e8f0;
+        background: linear-gradient(90deg, #e2e8f0 0%, #2563eb 50%, #e2e8f0 100%);
+        background-size: 200% 100%;
+        animation: processingPulse 3.5s infinite linear; /* 🧠 Tuned down to a calm 3.5 seconds */
+        box-shadow: 0 0 8px rgba(37, 99, 235, 0.15);
+    }
+
+    @keyframes processingPulse {
+        0% {
+            background-position: 200% 0;
+        }
+        100% {
+            background-position: -200% 0;
+        }
+    }
+
+    /* Flatpickr Premium UI Overrides */
+    .flatpickr-calendar {
+        border-radius: 12px !important;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08) !important;
+        border: 1px solid #e2e8f0 !important;
+        background: #ffffff !important;
+    }
+    .flatpickr-day.selected, .flatpickr-day.selected:hover {
+        background: #2563eb !important;
+        border-color: #2563eb !important;
+        color: #ffffff !important;
+    }
+</style>
+
+<div class="container my-5" style="max-width: 620px;">
+    
+    {% if success_message %}
+        <div class="card p-5 text-center border-0 shadow-lg" style="border-radius: 24px;">
+            <div class="mb-4">
+                <span class="badge bg-success-subtle p-3 text-success rounded-circle fs-3">✓</span>
+            </div>
+            <h3 class="fw-bold text-dark mb-2">Appointment Scheduled</h3>
+            <p class="text-muted px-2 mb-4">{{ success_message }}</p>
+            <a href="{% url 'booking' %}" class="btn btn-primary px-4 py-2.5 fw-semibold" style="border-radius: 20px; background-color: #2563eb; border: 0;">Book Another Slot</a>
+        </div>
+    {% else %}
+
+        <div class="card booking-card-wrapper border-0">
+            <div class="card-body p-4 p-sm-5">
+                
+                <div class="d-flex justify-content-between align-items-center mb-5 position-relative px-3">
+                    <div class="text-center position-relative z-index-2">
+                        <div class="step-badge-node bg-primary text-white mx-auto mb-1" style="background-color: #2563eb !important;">1</div>
+                        <small class="text-dark fw-bold" style="font-size: 0.75rem;">Details</small>
+                    </div>
+                    
+                    <div class="position-absolute top-50 start-0 end-0 translate-middle-y animated-process-line" style="z-index: 1;"></div>
+                    
+                    <a href="{% url 'track_progress' %}" class="text-center position-relative z-index-2 step-link-node">
+                        <div class="step-badge-node bg-white text-muted border mx-auto mb-1">2</div>
+                        <small class="text-muted fw-semibold" style="font-size: 0.75rem; transition: color 0.2s ease;">Approval</small>
+                    </a>
+                </div>
+
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold text-dark mb-1" style="letter-spacing: -0.75px;">Secure Appointment</h2>
+                    <p class="text-muted small">Fill out the official patient intake record below</p>
+                </div>
+
+                <form method="POST" action="" class="d-flex flex-column gap-3">
+                    {% csrf_token %}
+                    
+                    {% if form.non_field_errors or error_message %}
+                        <div class="alert alert-danger border-0 p-3 mb-2" style="border-radius: 12px; font-size: 0.88rem; background-color: #fee2e2; color: #991b1b; font-weight: 500;">
+                            {% if error_message %}{{ error_message }}{% endif %}
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    
+                    {% for field in form %}
+                        <div class="text-start">
+                            <label class="form-label small fw-semibold text-secondary mb-1">{{ field.label }}</label>
+                            <div class="form-control-container">
+                                {{ field }}
+                            </div>
+                            {% if field.errors %}
+                                <div class="text-danger small fw-medium mt-1" style="font-size: 0.78rem; color: #dc2626;">
+                                    {{ field.errors|striptags }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-success text-white w-100 py-3 fw-bold shadow-sm mt-3" style="border-radius: 24px; background-color: #10b981; border: 0; font-size: 1rem;">
+                        Confirm Registration Request
+                    </button>
+                </form>
+
+            </div>
+        </div>
+
+    {% endif %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Dynamic premium styling injection logic setup
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(el => {
+            if(el.type !== 'submit' && el.type !== 'hidden' && el.type !== 'checkbox'){
+                el.classList.add('form-control', 'premium-form-input');
+            }
+        });
+
+        // Initialize Flatpickr calendar interface instance pipeline
+        flatpickr(".datepicker", {
+            dateFormat: "Y-m-d", 
+            minDate: "today",    
+            allowInput: true,    
+        });
+    });
+</script>
+{% endblock %}
