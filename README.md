@@ -229,3 +229,8 @@ These controls help ensure confidentiality, integrity, and controlled access to 
 This project demonstrates the implementation of a secure and maintainable backend system using Django's proven development framework. By following the MVC architectural pattern, enforcing strong authentication controls, implementing object-level authorization, and leveraging Django's built-in security mechanisms, the system provides a reliable foundation for appointment management workflows.
 
 The architecture emphasizes scalability, separation of concerns, and security best practices, making it suitable as a foundation for future enterprise-level healthcare scheduling and appointment management solutions.
+## Security Note
+
+This repository was developed as a learning and portfolio project to demonstrate Django development skills. During development, temporary administrative setup utilities were used to simplify testing and local development. These utilities have since been removed, and the project has been refactored to follow more secure authentication and account-management practices.
+
+The current codebase does not contain hardcoded credentials, automated administrative account creation, or account-promotion logic. This cleanup was performed as part of the project's security review and reflects an important learning step in secure software development.
