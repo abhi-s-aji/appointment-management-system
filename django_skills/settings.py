@@ -31,7 +31,7 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
-ROOT_URLCONF = 'dajngo_skills.urls'
+ROOT_URLCONF = 'django_skills.urls'
 
 TEMPLATES = [
     {

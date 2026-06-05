@@ -1,5 +1,5 @@
 """
-URL configuration for dajngo_skills project.
+URL configuration for django_skills project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/6.0/topics/http/urls/
