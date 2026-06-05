@@ -90,3 +90,8 @@ ACCOUNT_ADAPTER = 'allauth.account.adapter.DefaultAccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'allauth.socialaccount.adapter.DefaultSocialAccountAdapter'
 
 SOCIALACCOUNT_LOGIN_ON_GET = True
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://appointment-management-system-production-abhisaji.up.railway.app',
+]
