@@ -1,9 +1,12 @@
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-_@c*wtiljw2=mf8wm!_i(wxm$lp8&_fu1vt6((7!7q6@pny=6j'
-DEBUG = false
-ALLOWED_HOSTS = []
+SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG = False
+ALLOWED_HOSTS = ['appointment-system-a889.onrender.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
