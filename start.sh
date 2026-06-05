@@ -1,12 +1,15 @@
 #!/bin/bash
 set -e
 
-echo "--- STARTING DEPLOYMENT ---"
-echo "GOOGLE_CLIENT_ID is set: $( [ -n "$GOOGLE_CLIENT_ID" ] && echo "YES" || echo "NO" )"
+# Log the presence of variables
+echo "--- DEBUG LOGS ---"
+if [ -z "$GOOGLE_CLIENT_ID" ]; then echo "MISSING: GOOGLE_CLIENT_ID"; else echo "FOUND: GOOGLE_CLIENT_ID"; fi
+if [ -z "$GOOGLE_CLIENT_SECRET" ]; then echo "MISSING: GOOGLE_CLIENT_SECRET"; else echo "FOUND: GOOGLE_CLIENT_SECRET"; fi
 
 python manage.py migrate --noinput
 python manage.py collectstatic --noinput
 
+# Seed the database
 python manage.py shell -c "
 import os
 from django.contrib.sites.models import Site
@@ -26,9 +29,6 @@ if client_id and secret:
         defaults={'name': 'Google', 'client_id': client_id, 'secret': secret}
     )
     app.sites.add(site)
-    print('SUCCESS: SocialApp configured.')
-else:
-    print('FAILURE: GOOGLE_CLIENT_ID or SECRET is empty in the environment!')
 "
 
 exec gunicorn django_skills.wsgi:application --bind 0.0.0.0:$PORT
