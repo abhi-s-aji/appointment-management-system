@@ -5,8 +5,8 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
-DEBUG = True
-ALLOWED_HOSTS = ['*']
+DEBUG = False
+ALLOWED_HOSTS = ['appointment-management-system-production-abhisaji.up.railway.app']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
