@@ -1,5 +1,5 @@
 """
-WSGI config for dajngo_skills project.
+WSGI config for django_skills project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
