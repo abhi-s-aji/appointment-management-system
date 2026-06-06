@@ -43,7 +43,7 @@
                 </ul>
                 <div class="d-flex align-items-center ms-auto">
                     {% if user.is_authenticated %}
-                        <div class="dropdown">
+                        <div class="dropdown position-static position-md-relative">
                             <div class="profile-avatar-btn" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ user.username|slice:":1"|upper }}
                             </div>
