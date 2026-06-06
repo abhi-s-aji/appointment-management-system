@@ -1,6 +1,5 @@
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from allauth.socialaccount.providers.google.views import oauth2_login, oauth2_callback
 from . import views
 
 urlpatterns = [
@@ -11,21 +10,19 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('department/', views.department, name='department'),
     path('departments/', views.department, name='departments_plural'),
-    
+
     # Custom Auth
     path('auth/login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('auth/logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
+
     
-    # Google Auth Paths
-    path('accounts/google/login/', oauth2_login, name='google_login'),
-    path('accounts/google/login/callback/', oauth2_callback, name='google_callback'),
-    
+    path("accounts/", include("allauth.urls")),
+
     path('login-redirect/', views.login_redirect, name='login_redirect'),
     path('profile-setup/', views.profile_setup, name='profile_setup'),
-    
-    # Profile Settings Route (Added this to fix your error)
+
     path('profile/settings/', views.user_profile_settings, name='user_profile_settings'),
-    
+
     path('track-progress/', views.track_progress, name='track_progress'),
     path('track/<int:booking_id>/', views.track_progress, name='view_individual_booking'),
     path('track/<int:booking_id>/accept/', views.patient_accept_reschedule, name='accept_reschedule'),
