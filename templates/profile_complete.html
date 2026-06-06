@@ -1,0 +1,7 @@
+<h2>Complete Your Profile</h2>
+
+<form method="post">
+  {% csrf_token %}
+  <input type="text" name="name" placeholder="Enter Full Name" required>
+  <button type="submit">Save</button>
+</form>
