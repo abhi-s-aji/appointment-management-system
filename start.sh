@@ -1,34 +1,29 @@
 #!/bin/bash
 set -e
 
-# Log the presence of variables
-echo "--- DEBUG LOGS ---"
-if [ -z "$GOOGLE_CLIENT_ID" ]; then echo "MISSING: GOOGLE_CLIENT_ID"; else echo "FOUND: GOOGLE_CLIENT_ID"; fi
-if [ -z "$GOOGLE_CLIENT_SECRET" ]; then echo "MISSING: GOOGLE_CLIENT_SECRET"; else echo "FOUND: GOOGLE_CLIENT_SECRET"; fi
-
+# Run Migrations
 python manage.py migrate --noinput
-python manage.py collectstatic --noinput
 
-# Seed the database
+# Create superuser from Environment Variables
 python manage.py shell -c "
 import os
-from django.contrib.sites.models import Site
-from allauth.socialaccount.models import SocialApp
+from django.contrib.auth import get_user_model
 
-client_id = os.environ.get('GOOGLE_CLIENT_ID')
-secret = os.environ.get('GOOGLE_CLIENT_SECRET')
+User = get_user_model()
+username = os.environ.get('DJANGO_SUPERUSER_USERNAME')
+password = os.environ.get('DJANGO_SUPERUSER_PASSWORD')
+email = os.environ.get('DJANGO_SUPERUSER_EMAIL')
 
-if client_id and secret:
-    site = Site.objects.get_current()
-    site.domain = 'appointment-management-system-production-abhisaji.up.railway.app'
-    site.name = 'Appointment System'
-    site.save()
-
-    app, _ = SocialApp.objects.update_or_create(
-        provider='google',
-        defaults={'name': 'Google', 'client_id': client_id, 'secret': secret}
-    )
-    app.sites.add(site)
+if username and password and email:
+    if not User.objects.filter(username=username).exists():
+        User.objects.create_superuser(username=username, email=email, password=password)
+        print('Superuser created from environment variables.')
+    else:
+        print('Superuser already exists.')
+else:
+    print('WARNING: Superuser environment variables not set.')
 "
+
+# ... (Keep your SocialApp seeding logic here) ...
 
 exec gunicorn django_skills.wsgi:application --bind 0.0.0.0:$PORT
