@@ -95,3 +95,7 @@ SOCIALACCOUNT_LOGIN_ON_GET = True
 CSRF_TRUSTED_ORIGINS = [
     'https://appointment-management-system-production-abhisaji.up.railway.app',
 ]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+SECURE_SSL_REDIRECT = True  
