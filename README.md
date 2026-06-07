@@ -2,7 +2,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live%20Application-Visit%20Now-brightgreen)](https://appointment-management-system-production-abhisaji.up.railway.app)
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue)](www.linkedin.com/in/abhi-s-aji-008445267)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Abhi%20S%20Aji-blue)](https://www.linkedin.com/in/abhi-s-aji-008445267/)
 
 ## Project Overview
 
