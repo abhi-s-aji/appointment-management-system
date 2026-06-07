@@ -1,5 +1,9 @@
 # Appointment Management System
 
+[![Live Demo](https://img.shields.io/badge/Live%20Application-Visit%20Now-brightgreen)](https://appointment-management-system-production-abhisaji.up.railway.app)
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue)](https://www.linkedin.com/in/your-linkedin-username/)
+
 ## Project Overview
 
 The Appointment Management System is a backend-driven web application developed using Django. The system provides a structured and secure platform for managing clinical appointments, enabling authenticated users to schedule, track, update, and manage appointment records efficiently.
@@ -235,8 +239,9 @@ This repository was developed as a learning and portfolio project to demonstrate
 
 The current codebase does not contain hardcoded credentials, automated administrative account creation, or account-promotion logic. This cleanup was performed as part of the project's security review and reflects an important learning step in secure software development.
 
-# Appointment Management System
+## Contact
 
-[![Live Demo](https://img.shields.io/badge/%20Live%20Application-Visit%20Now-brightgreen)](https://appointment-management-system-production-abhisaji.up.railway.app)
+**Abhi S Aji**
 
-A secure, backend-driven clinical appointment scheduling system developed with Django.
+- LinkedIn: https://www.linkedin.com/in/your-linkedin-username/
+- GitHub: https://github.com/abhi-s-aji
