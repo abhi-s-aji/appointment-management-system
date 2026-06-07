@@ -2,7 +2,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live%20Application-Visit%20Now-brightgreen)](https://appointment-management-system-production-abhisaji.up.railway.app)
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue)](https://www.linkedin.com/in/your-linkedin-username/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue)](www.linkedin.com/in/abhi-s-aji-008445267)
 
 ## Project Overview
 
@@ -243,5 +243,5 @@ The current codebase does not contain hardcoded credentials, automated administr
 
 **Abhi S Aji**
 
-- LinkedIn: https://www.linkedin.com/in/your-linkedin-username/
+- LinkedIn: www.linkedin.com/in/abhi-s-aji-008445267
 - GitHub: https://github.com/abhi-s-aji
