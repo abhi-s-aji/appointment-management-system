@@ -234,3 +234,9 @@ The architecture emphasizes scalability, separation of concerns, and security be
 This repository was developed as a learning and portfolio project to demonstrate Django development skills. During development, temporary administrative setup utilities were used to simplify testing and local development. These utilities have since been removed, and the project has been refactored to follow more secure authentication and account-management practices.
 
 The current codebase does not contain hardcoded credentials, automated administrative account creation, or account-promotion logic. This cleanup was performed as part of the project's security review and reflects an important learning step in secure software development.
+
+# Appointment Management System
+
+[![Live Demo](https://img.shields.io/badge/%20Live%20Application-Visit%20Now-brightgreen)](https://appointment-management-system-production-abhisaji.up.railway.app)
+
+A secure, backend-driven clinical appointment scheduling system developed with Django.
